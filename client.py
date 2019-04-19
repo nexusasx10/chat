@@ -5,8 +5,9 @@ from threading import Thread, RLock
 
 
 class Client:
-    def __init__(self, server_ip):
-        self.name = 'Nameless'
+
+    def __init__(self, server_ip, name):
+        self.name = name
         self.connected = False
         self.server_ip = server_ip
         self.new_messages = list()
@@ -47,7 +48,10 @@ class Client:
 
 
 if __name__ == '__main__':
+    # TODO: use argparse
     if len(argv) == 1:
-        CLIENT = Client('localhost')
+        CLIENT = Client('localhost', 'Nameless')
     elif len(argv) == 2:
-        CLIENT = Client(argv[1])
+        CLIENT = Client(argv[1], 'Nameless')
+    elif len(argv) == 3:
+        CLIENT = Client(argv[1], argv[2])
