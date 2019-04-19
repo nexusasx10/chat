@@ -23,7 +23,7 @@ class Server:
         self.alive = True
         self.connect_thread = Thread(target=self.connect_cycle)
         self.connect_thread.start()
-        print('started')
+        print('Chat.')
         self.input_handle()
 
     def input_handle(self):
@@ -38,7 +38,7 @@ class Server:
                     self.alive = False
                     return
                 else:
-                    print('Unknown command')
+                    print(f'Unknown command "{cmd}"')
             except KeyboardInterrupt:
                 self.alive = False
                 return
@@ -52,7 +52,7 @@ class Server:
 
             client_name = self.get_message(client)
             for chatter in self.chatters:
-                chatter.msgs.append('-> {} has connected.'.format(client_name))
+                chatter.msgs.append('{} has connected.'.format(client_name))
             print('New chatter: {}'.format(client_name))
             new_chatter = Chatter(client_name, client, address)
             self.chatters.append(new_chatter)
@@ -77,7 +77,7 @@ class Server:
                 name = chatter.name
                 self.chatters.remove(chatter)
                 for man in self.chatters:
-                    man.msgs.append('-> {} has disconnected.'.format(name))
+                    man.msgs.append('{} has disconnected.'.format(name))
                 break
 
             for man in self.chatters:
