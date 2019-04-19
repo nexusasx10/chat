@@ -20,12 +20,31 @@ class Server:
         self.socket.bind((ip, port))
         self.socket.listen(2)
         self.chatters = []
+        self.alive = True
         self.connect_thread = Thread(target=self.connect_cycle)
         self.connect_thread.start()
         print('started')
+        self.input_handle()
+
+    def input_handle(self):
+        commands = ['help', 'exit']
+        while True:
+            try:
+                cmd = input('> ')
+                if cmd == commands[0]:
+                    for command in commands:
+                        print(command)
+                elif cmd == commands[1]:
+                    self.alive = False
+                    return
+                else:
+                    print('Unknown command')
+            except KeyboardInterrupt:
+                self.alive = False
+                return
 
     def connect_cycle(self):
-        while True:
+        while self.alive:
             try:
                 client, address = self.socket.accept()
             except timeout:
