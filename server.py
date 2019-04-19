@@ -4,6 +4,7 @@ from pickle import loads, dumps
 
 
 class Chatter:
+
     def __init__(self, name, socket_, address):
         self.name = name
         self.socket = socket_
@@ -12,6 +13,7 @@ class Chatter:
 
 
 class Server:
+
     def __init__(self, ip, port):
         self.socket = socket()
         self.socket.settimeout(0.1)

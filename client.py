@@ -12,6 +12,7 @@ class Client:
         self.new_messages = list()
         self.socket = None
         self.lock = RLock()
+        self.update_thread = Thread(target=self.update_cycle)
 
     def get_message(self):
         data_len = self.socket.recv(2)
@@ -25,7 +26,6 @@ class Client:
         self.socket.send(message)
 
     def connect(self):
-        self.update_thread = Thread(target=self.update_cycle)
         self.socket = socket()
         self.socket.connect((self.server_ip, 19001))
         self.connected = True

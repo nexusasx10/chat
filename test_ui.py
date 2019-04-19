@@ -3,6 +3,7 @@ from tkinter import Tk, Canvas, Frame, Text
 
 
 class Interface:
+
     def __init__(self, width, height, title):
         self.tk = Tk()
         self.tk.title(title)
@@ -88,4 +89,5 @@ class Interface:
         self.tk.mainloop()
 
 
-Interface(400, 500, 'Test').run()
+if __name__ == '__main__':
+    Interface(400, 500, 'Test').run()

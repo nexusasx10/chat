@@ -1,10 +1,10 @@
 from client import Client
 from tkinter import Tk, Entry, Label, Button, Text
-import datetime
 from sys import argv
 
 
 class ClientGUI:
+
     def __init__(self):
         self.client = Client(argv[1] if len(argv) == 2 else 'localhost')
         self.window = Tk()
